@@ -378,53 +378,8 @@ def gimmel():
 #for activation function sigmoid alpha  0.1 Lambda  0.01 acc for X_test =  9.902777777777779
 if __name__ == "__main__":
     gimmel()
+
     
-    #daled: reLu doesnot work, here, RuntimeWarning: divide by zero encountered in log: J += (-1) * 
- 
-    #hey: also doesnt work... for  2 hidden layers with  32 nodes  with activation function reLU 
-    #   alpha  0.01 Lambda  0 , max iter 100 acc for X_test =  9.63888888888889
-    
- 
-#using sigmoid
-
-# C:\Users\Public\anaconda3\lib\site-packages\numpy\core\fromnumeric.py:87: RuntimeWarning: overflow encountered in reduce
-#   return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
-# C:\Users\Eden Akiva\Desktop\ML\hw4\NN_ff_bp_2022 MNIST_class.py:250: RuntimeWarning: overflow encountered in square
-#   theta_sum += np.sum(np.square(Thetas[iterati]))
-  
-# C:\Users\Eden Akiva\Desktop\ML\hw4\NN_ff_bp_2022 MNIST_class.py:30: RuntimeWarning: overflow encountered in exp
-#   A = 1/(1+np.exp(-Z))
-# iter num  2
-
-
-#and changing alpha from 0.001 to 0.01
-# .py:30: RuntimeWarning: overflow encountered in exp
-#   A = 1/(1+np.exp(-Z))
-# iter num  1
-
-
-#using relu
-# in aL there are a bunch of 1's, and then log(1-1) gets stuck
-
-# .py:232: RuntimeWarning: divide by zero encountered in log
-#   J += (-1) * (np.dot(ybin.T, np.log(aL))) + (np.dot((1 - ybin).T, np.log(1 - aL)))
-# .py:30: RuntimeWarning: overflow encountered in exp
-#   A = 1/(1+np.exp(-Z))
-# .py:232: RuntimeWarning: invalid value encountered in add
-#   J += (-1) * (np.dot(ybin.T, np.log(aL))) + (np.dot((1 - ybin).T, np.log(1 - aL)))
-# Cost function J =  [[nan]] in iteration 0 acc training set =  11.152777777777779
-# iter num  0
-
-
-
-
-#what about doing batches?
-
-# C:\Users\Public\anaconda3\lib\site-packages\numpy\core\fromnumeric.py:87: RuntimeWarning: overflow encountered in reduce
-#   return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
-# iter num  120
-# C:\Users\Eden Akiva\Desktop\ML\hw4\NN_ff_bp_2022 MNIST_class.py:249: RuntimeWarning: overflow encountered in square
-#   theta_sum += np.sum(np.square(Thetas[iterati]))
 
 
 
