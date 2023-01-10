@@ -25,9 +25,7 @@ def sigmoid(Z):
     Return:
     A - sigmoid(Z)
     """
-    #TWO
-    # RuntimeWarning: overflow encountered in exp
-###########################################################
+   
     A = 1/(1+np.exp(-Z))
     
     return A
@@ -87,8 +85,8 @@ def init_parameters(Lin, Lout):
     
     """
     
-    factor = np.sqrt(6/(Lin+Lout)) #why??
-    Theta = np.zeros((Lout, Lin+1)) #np.random.rand(Lout, Lin+1)
+    factor = np.sqrt(6/(Lin+Lout))
+    Theta = np.zeros((Lout, Lin+1))
     Theta = 2*factor*(np.random.rand(Lout, Lin+1) - 0.5)
     
     
@@ -107,17 +105,17 @@ def ff_predict(Thetas, X, y, activation = reLU):
     y - input labels
     Output arguments:
     p - the predicted labels of the inputs
-    Usage: p = ff_predict(Theta1, Theta2, X) #### not y?
+    Usage: p = ff_predict(Theta1, Theta2, X) 
     """
     theta_size = len(Thetas)
     m = X.shape[0] # num of samples
     num_outputs = Thetas[-1].shape[0]
     p = np.zeros((m,1)) #predictions for each sample.. 
-    #different or same as backprop p and m and...
+  
 
     
     
-    X_0 = np.ones( (X.shape[0], 1) ) # why not use m??
+    X_0 = np.ones( (X.shape[0], 1) ) 
     X1 = np.concatenate((X_0, X), axis = 1) # add bias col, each row an input 
     
     an = np.copy(X1)
@@ -180,7 +178,7 @@ def backprop(Thetas, X, y, activation = reLU, a_deriv = reLU_deriv, max_iter = 1
         J = 0
                 
         dTheta_l = []
-        Theta_grad_l = [] #do i really need both???
+        Theta_grad_l = []
 #i
         for i in range(theta_size):
             dTheta_l.append(np.zeros(Thetas[i].shape))
@@ -197,16 +195,16 @@ def backprop(Thetas, X, y, activation = reLU, a_deriv = reLU_deriv, max_iter = 1
             X1 = np.concatenate((X1_0, X1), axis=1)
             X1 = X1.T # now col ?
             
-            # ME'A'PES the zn, an (delta?) for each SAMPLE
+            # ME'A'PES the zn, an for each SAMPLE
 
-            an = np.copy(X1) # necessary??
+            an = np.copy(X1)
     #########################
-            an_list = [np.copy(an)] #do i need to initiate all shapes here too? thetas[1]
-            zn_l = [] #ditto above. of size x input, and then thetas[0]
+            an_list = [np.copy(an)] 
+            zn_l = [] 
 #j
             for j in range(theta_size - 1): 
                 theta = Thetas[j]
-                zn = np.dot(theta, an) # if zn created in for loop...
+                zn = np.dot(theta, an)
                 an = activation(zn)
                 # add bias to an
                 ones = np.ones( (an.shape[1],1) )
@@ -214,9 +212,8 @@ def backprop(Thetas, X, y, activation = reLU, a_deriv = reLU_deriv, max_iter = 1
                 an = np.concatenate((ones,an),axis = 0)
                 #print(an_list[0]) 
                 # add zn and an to lists
-                zn_l.append(zn) # ... will zn in list exist out of for?
+                zn_l.append(zn) 
                 an_list.append(an)
-                #print(an_list[0])
             # for last col activation is always sigmoid 
             zL = np.dot( Thetas[-1], an) #maybe an_list[-1]
             zn_l.append(zL)
@@ -228,18 +225,15 @@ def backprop(Thetas, X, y, activation = reLU, a_deriv = reLU_deriv, max_iter = 1
             ybin[ y[r[k]], : ] = 1 #check y for samples labeled value
             
             
-            #FIRST THEN 28 THEN THIRD
-            # RuntimeWarning: divide by zero encountered in log
-            #RuntimeWarning: invalid value encountered in add
-########################################################################################
+         
             J += (-1) * (np.dot(ybin.T, np.log(aL))) + (np.dot((1 - ybin).T, np.log(1 - aL))) 
             deltaL = (aL - ybin)
-   ######################################
+   
             delta_n_l = [deltaL] # going to go from deltaL ..to.. delta2
             
             for itera in range(theta_size-1):
                 g_d_zn = a_deriv(zn_l[-(itera+2)])
-                delta_n = np.dot(Thetas[-(itera+1)].T[1:,:], delta_n_l[-1]) ##### DO I NEED TO MAKE THIS GLOBAL?????
+                delta_n = np.dot(Thetas[-(itera+1)].T[1:,:], delta_n_l[-1])
                 delta_n = delta_n * g_d_zn
                 delta_n_l.append(delta_n)
                                  
@@ -258,22 +252,16 @@ def backprop(Thetas, X, y, activation = reLU, a_deriv = reLU_deriv, max_iter = 1
  
         for iteration in range(theta_size):
             Thetas[iteration] = Thetas[iteration] - alpha * Theta_grad_l[iteration]
-        #maybe keep a acc array to keep track of improvement??
         p, acc = ff_predict(Thetas, X, y)
         acc_list.append(acc)
         if np.mod(q, max_iter/10) == 0: #do i need (int)(maxiter/10)?
             print('Cost function J = ', J, 'in iteration', q, 'acc training set = ', acc)
 
-        #time.sleep(0.001)
-        #if np.mod(q, 20) == 0: print("iter num " , q)
-    # info = str( len(Thetas) - 1 ) + 'hidden layers with ' + str( num_hidden ) +'nodes'+
-    #      ' with activation function' + str( activation.__name__ ) + 'alpha ' + str(alpha)
-    #      + 'Lambda ' + str( Lambda ) + ", max iter" + str(max_iter)
     plt.figure(1)
-    plt.title("accuracy") #+info)
+    plt.title("accuracy") 
     plt.plot(acc_list)
     plt.figure(2)
-    plt.title("J cost") #+info)
+    plt.title("J cost") 
     plt.plot(J_list)
 
     plt.show()
@@ -285,8 +273,8 @@ def try_digits():
     digits = datasets.load_digits()
     
     # flatten the images
-    n_samples = len(digits.images) # m ?
-    data = digits.images.reshape((n_samples, -1)) # not includeing label?
+    n_samples = len(digits.images) 
+    data = digits.images.reshape((n_samples, -1)) 
     
     
     # Split data into 50% train and 50% test subsets
