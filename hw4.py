@@ -12,7 +12,7 @@ import pandas as pd
 from tensorflow import keras 
 from tensorflow.keras import layers
 
-def showvec(X): #,Y):
+def showvec(X):
     fig, axs = plt.subplots(5, 5)
     plt.subplots_adjust(wspace=0, hspace=0.1)
     r = c = 0
@@ -29,7 +29,7 @@ def showvec(X): #,Y):
     
 df = pd.read_excel('face_data.xlsx') #10,000 pics, 3,000 faces, 7,000 not
 M = df.to_numpy()
-MT = M.T #just to change things up?
+MT = M.T
 X = MT[:-1,:]
 Y = MT[784,:]
 X_train = MT[:-1,1000:5000] #2,000 faces and 2,000 others
