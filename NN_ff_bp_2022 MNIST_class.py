@@ -160,18 +160,18 @@ def backprop(Thetas, X, y, activation = reLU, a_deriv = reLU_deriv, max_iter = 1
     Usage:
     [J,Theta1,Theta2] = backprop(Theta1, Theta2, X,y,max_iter, alpha,Lambda)
     """
-#m
+
     m = X.shape[0] # num of samples
     num_outputs = Thetas[-1].shape[0]
     theta_size = len(Thetas)
     deltaL = np.zeros((num_outputs, 1)) 
     ybin = np.zeros(deltaL.shape)
-#p
+
     p = np.zeros((m, 1))
     J = 0
     acc_list = []
     J_list = []
-#q
+
     for q in range(max_iter):
        
         # ME'A'PES the cost and theta grads for each ITERATION      
@@ -179,13 +179,13 @@ def backprop(Thetas, X, y, activation = reLU, a_deriv = reLU_deriv, max_iter = 1
                 
         dTheta_l = []
         Theta_grad_l = []
-#i
+
         for i in range(theta_size):
             dTheta_l.append(np.zeros(Thetas[i].shape))
             Theta_grad_l.append(np.zeros(Thetas[i].shape))
             
         r = np.random.permutation(m)
-#k 
+ 
         for k in range(m): # for each sample
             X1 = X[r[k], :] #pick one sample
             X1 = X1.reshape( 1, X1.shape[0] ) #make row
@@ -193,7 +193,7 @@ def backprop(Thetas, X, y, activation = reLU, a_deriv = reLU_deriv, max_iter = 1
             # forward propogation BUT save zn, an
             X1_0 = np.ones( (X1.shape[0], 1) )
             X1 = np.concatenate((X1_0, X1), axis=1)
-            X1 = X1.T # now col ?
+            X1 = X1.T 
             
             # ME'A'PES the zn, an for each SAMPLE
 
@@ -201,7 +201,7 @@ def backprop(Thetas, X, y, activation = reLU, a_deriv = reLU_deriv, max_iter = 1
     #########################
             an_list = [np.copy(an)] 
             zn_l = [] 
-#j
+
             for j in range(theta_size - 1): 
                 theta = Thetas[j]
                 zn = np.dot(theta, an)
