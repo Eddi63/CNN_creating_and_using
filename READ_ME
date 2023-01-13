@@ -1,1 +1,2 @@
-Create CNN and use and compare with tensorflow cnn
+Create and use a neural network, and compare with networks using tensorflow and keras to distinguish between images of faces of people versus
+others that do not contain a face (face detection), as well as a classification of MNIST and MNIST_F data.
